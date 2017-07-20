@@ -2,18 +2,19 @@ require 'oauth'
 
 class OauthController < ApplicationController
     def get_twitter_oauth_url
+
+      consumer_key = "QtoIuqnXzNvB5fj8Su2tASXaV"
+      consumer_secret = "B9zL5AtlWNifA2NC1nRjhJHCKLXja54FNJHXrieSHUwrEE2a1s"
+
       consumer = OAuth::Consumer.new(
-        Oauth::QtoIuqnXzNvB5fj8Su2tASXaV,
-        Oauth::B9zL5AtlWNifA2NC1nRjhJHCKLXja54FNJHXrieSHUwrEE2a1s,
+        consumer_key,
+        consumer_secret,
         { :site => "https://api.twitter.com" }
       )
   
       request_token = consumer.get_request_token(
         :oauth_callback => "http://localhost:3000/oauth_twitter"
       )
-  
-      cookies[:request_token] = request_token.token
-      cookies[:request_token_secret] = request_token.secret
   
       rtn = {}
       rtn["status"] = true
